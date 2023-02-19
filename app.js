@@ -76,7 +76,7 @@ app.post('/interactions', async function (req, res) {
         console.log('error message')
       }
       
-      let chatgpt_response = await  await chatgpt(message)
+      let chatgpt_response = await chatgpt(message)
       let reply = `**You:** ${message}\n**ChatGPT:** ${chatgpt_response.trim()}`
       console.log(message, reply)
       return res.send({
