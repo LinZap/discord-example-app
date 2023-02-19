@@ -75,16 +75,24 @@ app.post('/interactions', async function (req, res) {
       catch {
         console.log('error message')
       }
+      res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: 'Please wait...',
+        },
+      });
       
       let chatgpt_response = await chatgpt(message)
       let reply = `**You:** ${message}\n**ChatGPT:** ${chatgpt_response.trim()}`
       console.log(message, reply)
+ 
       return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        type: InteractionResponseType.UPDATE_MESSAGE,
         data: {
           content: reply,
         },
       });
+      
     }
 
 
