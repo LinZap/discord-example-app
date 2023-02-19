@@ -16,7 +16,7 @@ export default async function (message) {
         prompt: message,
         // temperature: 0.5,
         //stop: null,
-        max_tokens: 500,
+        max_tokens: 100,
         //logit_bias: {"50256": -100},
         temperature: 1,
         // top_p: 0.1,
