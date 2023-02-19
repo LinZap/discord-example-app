@@ -67,11 +67,12 @@ app.post('/interactions', async function (req, res) {
      // "chat" chatgpt command
      if (name === 'chat') {
       // Send a message into the channel where command was triggered from
+      console.log(req.body.data.options);
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           // Fetches a random emoji to send from a helper function
-          content: await chatgpt(interaction.options.value),
+          content: await chatgpt(req.body.data.options.value),
         },
       });
     }
