@@ -77,7 +77,7 @@ app.post('/interactions', async function (req, res) {
       }
       
       let chatgpt_response = await  await chatgpt(message)
-
+      let content = `Ask: ${message}\nChatGPT: ${chatgpt_response}`
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
