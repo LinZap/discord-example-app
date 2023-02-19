@@ -22,6 +22,7 @@ import {
 const app = express();
 // Get port, or default to 3000
 const PORT = process.env.PORT || 3000;
+const HTTPSPORT = process.env.HTTPSPORT || 443;
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
@@ -194,6 +195,9 @@ if (fs.existsSync(process.env.PRIVATEKET) &&
   var certificate = fs.readFileSync(process.env.CERT, 'utf8');
   var credentials = { key: privateKey, cert: certificate };
   var httpsServer = https.createServer(credentials, app);
-  httpsServer.listen(443);
-  console.log('https server on 443!');
+  httpsServer.listen(HTTPSPORT);
+  console.log('Listening on port', HTTPSPORT);
+}
+else {
+  console.log('PRIVATEKET and CERT files are not exists so can not create https server', process.env.PRIVATEKET, process.env.CERT);
 }
