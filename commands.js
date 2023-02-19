@@ -72,6 +72,7 @@ export const CHAT_COMMAND = {
     {
       type: 3,
       name: 'message',
+      description: 'type something...',
       required: true,
     }
   ],
