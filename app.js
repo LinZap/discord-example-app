@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import https from 'https'
 import fs from 'fs'
+import chatgpt from './chatgpt.js'
 
 import {
   InteractionType,
@@ -15,6 +16,7 @@ import { getShuffledOptions, getResult } from './game.js';
 import {
   CHALLENGE_COMMAND,
   TEST_COMMAND,
+  CHAT_COMMAND,
   HasGuildCommands,
 } from './commands.js';
 
@@ -61,6 +63,20 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+
+     // "chat" chatgpt command
+     if (name === 'chat') {
+      // Send a message into the channel where command was triggered from
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          // Fetches a random emoji to send from a helper function
+          content: await chatgpt(interaction.options.value),
+        },
+      });
+    }
+
+
     // "challenge" guild command
     if (name === 'challenge' && id) {
       const userId = req.body.member.user.id;
@@ -185,6 +201,7 @@ app.listen(PORT, () => {
   // Check if guild commands from commands.js are installed (if not, install them)
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     TEST_COMMAND,
+    CHAT_COMMAND,
     CHALLENGE_COMMAND,
   ]);
 });

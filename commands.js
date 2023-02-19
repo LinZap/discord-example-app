@@ -65,6 +65,19 @@ export const TEST_COMMAND = {
   type: 1,
 };
 
+export const CHAT_COMMAND = {
+  name: 'chat',
+  description: 'Chat with ChatGPT',
+  options:[
+    {
+      type: 3,
+      name: 'message',
+      required: true,
+    }
+  ]
+};
+
+
 // Command containing options
 export const CHALLENGE_COMMAND = {
   name: 'challenge',
