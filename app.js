@@ -87,7 +87,7 @@ app.post('/interactions', async function (req, res) {
       console.log(message, reply)
  
       return res.send({
-        type: InteractionResponseType.UPDATE_MESSAGE,
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           content: reply,
         },
