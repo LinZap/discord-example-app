@@ -74,7 +74,8 @@ export const CHAT_COMMAND = {
       name: 'message',
       required: true,
     }
-  ]
+  ],
+  type: 1,
 };
 
 
