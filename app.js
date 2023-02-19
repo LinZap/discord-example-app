@@ -1,6 +1,8 @@
 import 'dotenv/config';
 import express from 'express';
 import https from 'https'
+import fs from 'fs'
+
 import {
   InteractionType,
   InteractionResponseType,
@@ -186,9 +188,12 @@ app.listen(PORT, () => {
   ]);
 });
 
-
-var privateKey  = fs.readFileSync(process.env.PRIVATEKET, 'utf8');
-var certificate = fs.readFileSync(process.env.CERT, 'utf8');
-var credentials = {key: privateKey, cert: certificate};
-var httpsServer = https.createServer(credentials, app);
-httpsServer.listen(443);
+if (fs.existsSync(process.env.PRIVATEKET) &&
+  fs.existsSync(process.env.CERT)) {
+  var privateKey = fs.readFileSync(process.env.PRIVATEKET, 'utf8');
+  var certificate = fs.readFileSync(process.env.CERT, 'utf8');
+  var credentials = { key: privateKey, cert: certificate };
+  var httpsServer = https.createServer(credentials, app);
+  httpsServer.listen(443);
+  console.log('https server on 443!');
+}
