@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import https from 'https'
 import {
   InteractionType,
   InteractionResponseType,
@@ -184,3 +185,10 @@ app.listen(PORT, () => {
     CHALLENGE_COMMAND,
   ]);
 });
+
+
+var privateKey  = fs.readFileSync(process.env.PRIVATEKET, 'utf8');
+var certificate = fs.readFileSync(process.env.CERT, 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(443);
