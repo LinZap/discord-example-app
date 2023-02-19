@@ -77,12 +77,12 @@ app.post('/interactions', async function (req, res) {
       }
       
       let chatgpt_response = await  await chatgpt(message)
-      let content = `**Ask**: ${message}\n**ChatGPT**: ${chatgpt_response}`
+      let reply = `**You:** ${message}\n**ChatGPT:** ${chatgpt_response.trim()}`
+      console.log(message, reply)
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          // Fetches a random emoji to send from a helper function
-          content: content,
+          content: reply,
         },
       });
     }
